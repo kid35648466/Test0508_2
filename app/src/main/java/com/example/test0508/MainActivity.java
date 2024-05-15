@@ -19,16 +19,16 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.rvMyData);
 
         List<StuData> stuDataList = new ArrayList<>();
-        stuDataList.add(new StuData("1", "John", "180"));
-        stuDataList.add(new StuData("2", "Tom", "175"));
-        stuDataList.add(new StuData("3", "Jerry", "170"));
-        stuDataList.add(new StuData("4", "Mike", "165"));
-        stuDataList.add(new StuData("5", "Jack", "160"));
-        stuDataList.add(new StuData("6", "Rose", "155"));
-        stuDataList.add(new StuData("7", "Lily", "150"));
-        stuDataList.add(new StuData("8", "Lucy", "145"));
-        stuDataList.add(new StuData("9", "Linda", "140"));
-        stuDataList.add(new StuData("10", "Marry", "135"));
+        stuDataList.add(new StuData(R.drawable.logo, "John", "180"));
+        stuDataList.add(new StuData(R.drawable.logo, "Tom", "175"));
+        stuDataList.add(new StuData(R.drawable.logo, "Jerry", "170"));
+        stuDataList.add(new StuData(R.drawable.logo, "Mike", "165"));
+        stuDataList.add(new StuData(R.drawable.logo, "Jack", "160"));
+        stuDataList.add(new StuData(R.drawable.logo, "Rose", "155"));
+        stuDataList.add(new StuData(R.drawable.logo, "Lily", "150"));
+        stuDataList.add(new StuData(R.drawable.logo, "Lucy", "145"));
+        stuDataList.add(new StuData(R.drawable.logo, "Linda", "140"));
+        stuDataList.add(new StuData(R.drawable.logo, "Marry", "135"));
         recyclerView.setAdapter(new StuDataAdapter(stuDataList));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

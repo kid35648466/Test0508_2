@@ -2,22 +2,22 @@ package com.example.test0508;
 
 public class StuData {
 
-    private String id;
+    private int id;
     private String name;
     private String height;
 
 
-    public StuData(String id, String name, String height) {
+    public StuData(int id, String name, String height) {
         this.id = id;
         this.name = name;
         this.height = height;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
