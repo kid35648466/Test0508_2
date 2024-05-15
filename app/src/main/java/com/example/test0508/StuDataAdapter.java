@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,7 @@ class StuDataAdapter extends RecyclerView.Adapter<StuDataAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         StuData stuData = stuDataList.get(position);
+        Glide.with(holder.itemView).load(stuData.getImageUrl()).into(img);
         img.setImageResource(stuData.getId());
         tvHeight1.setText(stuData.getHeight());
         tvName1.setText(stuData.getName());
