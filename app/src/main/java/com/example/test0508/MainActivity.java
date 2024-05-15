@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.rvMyData);
 
         List<StuData> stuDataList = new ArrayList<>();
-        stuDataList.add(new StuData("https://i.pximg.net/img-master/img/2020/02/23/03/40/04/79668094_p0_master1200.jpg", "John", "180"));
+        stuDataList.add(new StuData("https://png.pngtree.com/png-clipart/20210128/ourmid/pngtree-cute-villain-with-surprised-expression-png-image_2829431.jpg", "John", "180"));
         stuDataList.add(new StuData(R.drawable.logo, "Tom", "175"));
         stuDataList.add(new StuData(R.drawable.logo, "Jerry", "170"));
         stuDataList.add(new StuData(R.drawable.logo, "Mike", "165"));
