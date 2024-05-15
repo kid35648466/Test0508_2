@@ -6,8 +6,8 @@ public class StuData {
     private String name;
     private String height;
 
+    private  String imageUrl;
 
-    private String imageUrl;
 
     public StuData(int id, String name, String height) {
         this.id = id;
@@ -23,8 +23,7 @@ public class StuData {
         this.imageUrl = imageUrl;
     }
 
-    public StuData(int id, String name, String height, String imageUrl) {
-        this.id = id;
+    public StuData(String imageUrl, String name, String height) {
         this.name = name;
         this.height = height;
         this.imageUrl = imageUrl;
