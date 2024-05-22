@@ -1,10 +1,13 @@
 package com.example.test0508;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +20,19 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<StuData> stuDataList;
     private StuDataAdapter adapter;
+
+//建立一個ActivityRe
+private  ActivityResultLauncher<Intent> activityResultLauncher =
+                registerForActivityResult (new ActivityResultContracts.StartActivityForResult(),result-> {
+                    if (result != null) {
+                        Intent data = result.getData();
+                        String name = data.getStringExtra("name");
+                        String height = data.getStringExtra("height");
+                        String url = data.getStringExtra("url");
+                        stuDataList.add(new StuData(url, name, height));
+                        adapter.notifyDataSetChanged();
+                    }
+                });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void addData(View view) {
         Intent intent = new Intent(this, AddDataActivity.class);
-        startActivityForResult(intent, 1);
-
+//        startActivityForResult(intent, 1);
+        activityResultLauncher.launch(intent);
     }
 
     @Override
