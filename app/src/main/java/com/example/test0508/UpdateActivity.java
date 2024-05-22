@@ -15,6 +15,7 @@ public class UpdateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
+
         addName = findViewById(R.id.edAddName);
         addHeight = findViewById(R.id.edAddHeight);
         addUrl = findViewById(R.id.edAddImgURL);
