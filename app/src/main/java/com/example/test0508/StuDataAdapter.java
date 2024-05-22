@@ -49,11 +49,16 @@ class StuDataAdapter extends RecyclerView.Adapter<StuDataAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(v.getContext(), AddDataActivity.class);
                 intent.putExtra("name", stuData.getName());
                 intent.putExtra("height", stuData.getHeight());
                 intent.putExtra("url", stuData.getImageUrl());
+
+                //刪除點擊的 item
+                stuDataList.remove(position);
                 v.getContext().startActivity(intent);
+
             }
         });
 
