@@ -17,6 +17,12 @@ class StuDataAdapter extends RecyclerView.Adapter<StuDataAdapter.ViewHolder> {
     private ImageView img;
     private TextView tvName1;
     private TextView tvHeight1;
+
+
+    public List<StuData> getStuDataList() {
+        return stuDataList;
+    }
+
     private List<StuData> stuDataList;
 
     public StuDataAdapter(List<StuData> stuDataList) {
