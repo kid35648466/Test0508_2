@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,7 +20,7 @@ class StuDataAdapter extends RecyclerView.Adapter<StuDataAdapter.ViewHolder> {
     private TextView tvName1;
     private TextView tvHeight1;
 
-
+    private OnItemClickListener listener;
     public List<StuData> getStuDataList() {
         return stuDataList;
     }
@@ -46,28 +47,14 @@ class StuDataAdapter extends RecyclerView.Adapter<StuDataAdapter.ViewHolder> {
         Glide.with(holder.itemView).load(stuData.getImageUrl()).into(img);
         tvHeight1.setText(stuData.getHeight());
         tvName1.setText(stuData.getName());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(v.getContext(), AddDataActivity.class);
-                intent.putExtra("name", stuData.getName());
-                intent.putExtra("height", stuData.getHeight());
-                intent.putExtra("url", stuData.getImageUrl());
-
-                //刪除點擊的 item
-                stuDataList.remove(position);
-                v.getContext().startActivity(intent);
-
-            }
-        });
-
-
     }
-
     @Override
     public int getItemCount() {
         return stuDataList.size();
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.listener = onItemClickListener;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -76,6 +63,18 @@ class StuDataAdapter extends RecyclerView.Adapter<StuDataAdapter.ViewHolder> {
             img = itemView.findViewById(R.id.tvPic);
             tvName1 = itemView.findViewById(R.id.tvname);
             tvHeight1 = itemView.findViewById(R.id.tvHeight);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAbsoluteAdapterPosition();
+                    if (listener != null) {
+                        listener.onItemClick(position);
+                    }
+                }
+            });
         }
+    }
+    public interface OnItemClickListener {
+        void onItemClick(int position);
     }
 }
