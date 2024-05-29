@@ -59,16 +59,16 @@ public class MainActivity extends AppCompatActivity {
         stuDataList = new ArrayList<>();
 
         List<StuData> stuDataList = new ArrayList<>();
-        stuDataList.add(new StuData("https://png.pngtree.com/png-vector/20221222/ourmid/pngtree-super-cute-cartoon-vector-bear-png-image_6504049.png", "John", "180"));
-        stuDataList.add(new StuData("https://i.pinimg.com/736x/6b/5d/5d/6b5d5d8f600fb22a342d0a8d39ad6b2a.jpg", "Tom", "175"));
-        stuDataList.add(new StuData("https://png.pngtree.com/png-vector/20221222/ourmid/pngtree-super-cute-cartoon-vector-bear-png-image_6504049.png", "Jerry", "170"));
-        stuDataList.add(new StuData("https://www.cjcu.edu.tw/images/logo_story/logo-xl.jpg", "Mike", "165"));
-        stuDataList.add(new StuData("https://www.cjcu.edu.tw/images/logo_story/logo-xl.jpg", "Jack", "160"));
+        stuDataList.add(new StuData("https://i.pinimg.com/736x/17/73/dd/1773ddeae9660bd51e60240cb4fe3b9f.jpg", "Origami", "180"));
+        stuDataList.add(new StuData("https://i.pinimg.com/736x/0e/c1/48/0ec148f4924d1631decda5608702bbbe.jpg", "Nia", "175"));
+        stuDataList.add(new StuData("https://www.reddit.com/media?url=https%3A%2F%2Fi.redd.it%2Flvs8cyjsqpx61.jpg&rdt=60531", "Kurumi", "170"));
+        stuDataList.add(new StuData("https://i.pinimg.com/736x/46/92/a7/4692a7c700903bc86f69b7ab735c843b.jpg", "Yoshino", "160"));
+        stuDataList.add(new StuData("https://i.pinimg.com/236x/b0/18/20/b01820722d624554e220d9359b0c0f1a.jpg", "Mike", "165"));
         stuDataList.add(new StuData("https://www.cjcu.edu.tw/images/logo_story/logo-xl.jpg", "Rose", "155"));
         stuDataList.add(new StuData("https://www.cjcu.edu.tw/images/logo_story/logo-xl.jpg", "Lily", "150"));
         stuDataList.add(new StuData("https://www.cjcu.edu.tw/images/logo_story/logo-xl.jpg", "Lucy", "145"));
         stuDataList.add(new StuData("https://www.cjcu.edu.tw/images/logo_story/logo-xl.jpg", "Linda", "140"));
-        stuDataList.add(new StuData("https://www.cjcu.edu.tw/images/logo_story/logo-xl.jpg", "Marry", "135"));
+        stuDataList.add(new StuData("https://a.ppy.sh/13206763_1600386298.jpeg", "Tohka", "135"));
         adapter = new StuDataAdapter(stuDataList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
