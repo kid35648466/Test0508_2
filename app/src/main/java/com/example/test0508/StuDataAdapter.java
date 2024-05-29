@@ -1,32 +1,25 @@
 package com.example.test0508;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.bumptech.glide.Glide;
 class StuDataAdapter extends RecyclerView.Adapter<StuDataAdapter.ViewHolder> {
-
     private ImageView img;
     private TextView tvName1;
     private TextView tvHeight1;
 
     private OnItemClickListener listener;
+
     public List<StuData> getStuDataList() {
         return stuDataList;
     }
-
     private List<StuData> stuDataList;
-
     public StuDataAdapter(List<StuData> stuDataList) {
         this.stuDataList = stuDataList;
     }
@@ -39,11 +32,10 @@ class StuDataAdapter extends RecyclerView.Adapter<StuDataAdapter.ViewHolder> {
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         StuData stuData = stuDataList.get(position);
-        //        img.setImageResource(stuData.getId());
+//        img.setImageResource(stuData.getId());
         Glide.with(holder.itemView).load(stuData.getImageUrl()).into(img);
         tvHeight1.setText(stuData.getHeight());
         tvName1.setText(stuData.getName());

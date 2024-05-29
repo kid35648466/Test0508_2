@@ -1,5 +1,4 @@
 package com.example.test0508;
-
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
@@ -7,33 +6,47 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.util.Log;
 import android.view.View;
-
 import java.util.ArrayList;
 import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
-
     private RecyclerView recyclerView;
     private List<StuData> stuDataList;
     private StuDataAdapter adapter;
 
-//建立一個ActivityRe
-private  ActivityResultLauncher<Intent> activityResultLauncher =
-                registerForActivityResult (new ActivityResultContracts.StartActivityForResult(),result-> {
-                    if (result != null) {
+    //建立一個 ActivityResultContract 可以接收 addDataActivity 的資料
+    @SuppressLint("NotifyDataSetChanged")
+    private ActivityResultLauncher<Intent> activityResultLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                Log.d("DDDDD", "onActivityResult: " + result.getResultCode());
+                    if (result.getResultCode() == 200) {     //addDataActivity
                         Intent data = result.getData();
                         String name = data.getStringExtra("name");
                         String height = data.getStringExtra("height");
                         String url = data.getStringExtra("url");
-                        Log.d("DDDD", "name: " + name + " height: " + height + " url: " + url);
+                        Log.d("DDDDD", "name: " + name + " height: " + height + " url: " + url);
                         stuDataList.add(new StuData(url, name, height));
                         adapter.notifyDataSetChanged();
+                        recyclerView.setAdapter(adapter);
                     }
+                    if (result.getResultCode() == 100) {    //UpdateActivity
+                        Intent data = result.getData();
+                        String name = data.getStringExtra("name");
+                        String height = data.getStringExtra("height");
+                        String url = data.getStringExtra("url");
+                        int position = data.getIntExtra("position", 0);
+                        Log.d("DDDDD", "name: " + name + " height: " + height + " url: " + url);
+                        stuDataList.set(position,new StuData(url, name, height));
+                        adapter.notifyDataSetChanged();
+                        recyclerView.setAdapter(adapter);
+                    }
+                    Log.d("DDDDD", "onActivityResult: " + stuDataList.size());
+
                 });
 
     @Override
@@ -47,18 +60,19 @@ private  ActivityResultLauncher<Intent> activityResultLauncher =
 
         List<StuData> stuDataList = new ArrayList<>();
         stuDataList.add(new StuData("https://png.pngtree.com/png-vector/20221222/ourmid/pngtree-super-cute-cartoon-vector-bear-png-image_6504049.png", "John", "180"));
-        stuDataList.add(new StuData("https://www.cjcu.edu.tw/images/logo_story/logo-xl.jpg", "Tom", "175"));
-        stuDataList.add(new StuData("https://www.cjcu.edu.tw/images/logo_story/logo-xl.jpg", "Jerry", "170"));
+        stuDataList.add(new StuData("https://i.pinimg.com/736x/6b/5d/5d/6b5d5d8f600fb22a342d0a8d39ad6b2a.jpg", "Tom", "175"));
+        stuDataList.add(new StuData("https://png.pngtree.com/png-vector/20221222/ourmid/pngtree-super-cute-cartoon-vector-bear-png-image_6504049.png", "Jerry", "170"));
         stuDataList.add(new StuData("https://www.cjcu.edu.tw/images/logo_story/logo-xl.jpg", "Mike", "165"));
         stuDataList.add(new StuData("https://www.cjcu.edu.tw/images/logo_story/logo-xl.jpg", "Jack", "160"));
         stuDataList.add(new StuData("https://www.cjcu.edu.tw/images/logo_story/logo-xl.jpg", "Rose", "155"));
         stuDataList.add(new StuData("https://www.cjcu.edu.tw/images/logo_story/logo-xl.jpg", "Lily", "150"));
         stuDataList.add(new StuData("https://www.cjcu.edu.tw/images/logo_story/logo-xl.jpg", "Lucy", "145"));
         stuDataList.add(new StuData("https://www.cjcu.edu.tw/images/logo_story/logo-xl.jpg", "Linda", "140"));
-        stuDataList.add(new StuData("https://png.pngtree.com/png-vector/20221222/ourmid/pngtree-super-cute-cartoon-vector-bear-png-image_6504049.png", "Marry", "135"));
+        stuDataList.add(new StuData("https://www.cjcu.edu.tw/images/logo_story/logo-xl.jpg", "Marry", "135"));
         adapter = new StuDataAdapter(stuDataList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         adapter.setOnItemClickListener(new StuDataAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -67,6 +81,11 @@ private  ActivityResultLauncher<Intent> activityResultLauncher =
                 intent.putExtra("name", stuData.getName());
                 intent.putExtra("height", stuData.getHeight());
                 intent.putExtra("url", stuData.getImageUrl());
+                intent.putExtra("position", position);
+                Log.d("DDDDD", "onItemClick: " + position);
+                Log.d("DDDDD", "onItemClick: " + stuDataList.size());
+//                stuDataList.remove(position);
+                Log.d("DDDDD", "onItemClick: " + stuDataList.size());
                 activityResultLauncher.launch(intent);
             }
         });
@@ -77,16 +96,8 @@ private  ActivityResultLauncher<Intent> activityResultLauncher =
 //        startActivityForResult(intent, 1);
         activityResultLauncher.launch(intent);
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            String name = data.getStringExtra("name");
-            String height = data.getStringExtra("height");
-            String url = data.getStringExtra("url");
-            stuDataList.add(new StuData(url, name, height));
-            adapter.notifyDataSetChanged();
-        }
     }
 }
